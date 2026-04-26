@@ -1,0 +1,132 @@
+# =============================================================================
+# Configuration file for ToxTA Starship Diversity Analysis
+# Edit this file to customise the analysis. All paths are relative to the
+# project root (where the Snakefile lives) unless otherwise stated.
+# =============================================================================
+
+# ─── Output directory ─────────────────────────────────────────────────────────
+outdir: "results"
+logdir: "logs"
+
+# ─── Target genomes ───────────────────────────────────────────────────────────
+# Format: short_name: NCBI_accession
+# These accessions will be fetched automatically by the data_acquisition rules.
+#
+# ACTION: Before running, verify that newer long-read assemblies are available:
+#   datasets summary genome taxon "Bipolaris sorokiniana" \
+#     --assembly-level complete,chromosome | dataformat tsv genome
+#
+# The accessions below are the current best publicly available assemblies.
+# Replace with newer long-read (PacBio/Nanopore) accessions when available.
+
+genomes:
+  Pnodorum_SN15:
+    accession: "GCA_000146915.2"
+    assembly_name: "ASM14691v2"
+    species: "Parastagonospora nodorum"
+    strain: "SN15"
+    toxa_status: true            # known ToxA-positive
+    starship: "donor"            # original donor lineage
+
+  Ptritici_repentis_Pt1CBF:
+    accession: "GCA_000149985.1"
+    assembly_name: "ASM14998v1"
+    species: "Pyrenophora tritici-repentis"
+    strain: "Pt-1C-BFP"
+    toxa_status: true
+    starship: "Horizon"
+
+  Bsorokiniana_ND90Pr:
+    accession: "GCA_000338995.1"
+    assembly_name: "Cocsa1"
+    species: "Bipolaris sorokiniana"
+    strain: "ND90Pr"
+    toxa_status: true
+    starship: "Sanctuary"
+
+  # ── Additional ToxA-negative controls (optional) ──────────────────────────
+  # Uncomment and add accessions for ToxA-negative strains/species to use as
+  # negative controls in BLAST searches and synteny comparisons.
+  #
+  # Ptritici_repentis_DW5:
+  #   accession: "GCA_XXXXXXXXX.X"    # race 4 (ToxA-negative)
+  #   species: "Pyrenophora tritici-repentis"
+  #   strain: "DW5"
+  #   toxa_status: false
+  #   starship: "none"
+
+# ─── Resource files ───────────────────────────────────────────────────────────
+# These files must be present before running the pipeline.
+# See README.md for download instructions.
+
+resources:
+  toxa_protein_fasta: "resources/ToxA_P0C1P7.fasta"
+  yrec_hmm_profile:   "resources/Y_recombinase.hmm"  # Y_recomb_recC / PF13408 (Starship captain)
+
+# ─── BUSCO settings ───────────────────────────────────────────────────────────
+busco:
+  lineage: "fungi_odb10"         # ODB10 lineage database
+  mode: "genome"                 # genome | proteins | transcriptome
+  augustus_species: "botrytis_cinerea"  # closest model organism for Augustus
+  # Note: BUSCO will auto-download the lineage database on first run (~180 MB).
+  # To pre-download: busco --download fungi_odb10
+
+# ─── BLAST settings ───────────────────────────────────────────────────────────
+blast:
+  toxa_evalue: "1e-3"            # E-value threshold for tblastn ToxA search (relaxed: ToxA diverges across species)
+  toxa_perc_identity: 20         # Minimum % identity (ToxA in P.nodorum can be ~60% identical to Pt ToxA at protein level)
+  db_type: "nucl"                # nucleotide database for tblastn
+  outfmt: "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore"
+
+# ─── EDTA settings ────────────────────────────────────────────────────────────
+edta:
+  sensitive: 1                   # 1 = sensitive mode (slower but more complete)
+  species: "others"              # rice | maize | others
+  anno: 1                        # 1 = annotate TE in genome (requires CDS file)
+  evaluate: 0                    # 0 = skip TE lib evaluation (faster)
+  threads: 8
+  # Set anno=1 and provide a CDS file for better annotation accuracy.
+  # cds_file: "resources/reference_cds.fa"
+
+# ─── HMMER settings ───────────────────────────────────────────────────────────
+hmmer:
+  yrec_evalue: "1e-10"           # Stringent e-value for Y-Rec domain detection
+  domtblout: true                # Output domain table for downstream parsing
+
+# ─── TSD detection settings ───────────────────────────────────────────────────
+tsd:
+  window_size: 500               # bp upstream/downstream of Starship boundary to search
+  min_tsd_len: 4                 # minimum TSD length (bp)
+  max_tsd_len: 6                 # maximum TSD length (bp)
+  max_mismatches: 0              # perfect TSDs only (set to 1 for 1-mismatch tolerance)
+
+# ─── Clinker settings ─────────────────────────────────────────────────────────
+clinker:
+  min_identity: 0.3              # minimum amino acid identity to draw links
+  output_plot: "results/synteny/toxa_locus_clinker.html"
+  # Clinker takes annotated GenBank/GFF+FASTA files. 
+  # Point it to the ToxA-flanking region (±50 kb) extracted in blast_mining.smk
+
+# ─── Thread/resource allocation ───────────────────────────────────────────────
+# Adjust these based on your system.
+threads:
+  default: 4
+  heavy: 16                      # For EDTA, BUSCO (use on HPC nodes)
+  blast: 8
+
+# ─── Computational environment ────────────────────────────────────────────────
+# Set use_docker to true if running on macOS where EDTA is not natively available
+use_docker_for_edta: false       # change to true on macOS; see repeat_annotation.smk
+edta_docker_image: "oushujun/edta:2.2.0"
+
+# ─── GPU settings ─────────────────────────────────────────────────────────────
+# TIR-Learner (inside EDTA) uses TensorFlow for CNN-based TIR element prediction.
+# Set use_gpu: true to enable GPU acceleration (requires NVIDIA GPU + CUDA 12).
+# If GPU libraries are in a conda env, set conda_env_lib to the env lib path so
+# LD_LIBRARY_PATH is set correctly before EDTA runs.
+gpu:
+  use_gpu: true
+  conda_env_lib: "/home/codanics/miniconda3/envs/fungal_genomics/lib"
+  # Limit GPU memory growth to avoid OOM on smaller GPUs (e.g. 8 GB VRAM).
+  # TIR-Learner's CNN is small; growth mode is safe and recommended.
+  tf_memory_growth: true

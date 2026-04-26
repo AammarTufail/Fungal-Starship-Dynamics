@@ -1,0 +1,98 @@
+name: fungal_genomics
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  # ── Workflow manager ──────────────────────────────────────────────────────
+  - snakemake=7.32.4
+
+  # ── Package manager (install first: `conda install mamba -n base -c conda-forge`) ──
+  # mamba is used to install this environment itself; not listed as a dep.
+
+  # ── Data acquisition ──────────────────────────────────────────────────────
+  - ncbi-datasets-cli>=18.0          # `datasets` and `dataformat` CLI tools; v16 incompatible with current NCBI API
+
+  # ── Assembly quality ──────────────────────────────────────────────────────
+  - busco=5.7.1                      # requires augustus, hmmer, blast internally
+  - augustus=3.5.0
+  - seqkit=2.8.2                     # fast FASTA/FASTQ manipulation
+  - assembly-stats=1.0.1             # N50, total length, contig count summary
+
+  # ── Repeat / TE annotation ────────────────────────────────────────────────
+  # EDTA is Linux-only. On macOS use the Docker image: oushujun/edta:2.2.0
+  # On HPC (Linux): conda install edta=2.2.0
+  - edta=2.2.0                       # Full TE annotation pipeline
+  - repeatmasker=4.1.5               # Used internally by EDTA
+  - ltr_finder_parallel=1.1          # Used internally by EDTA
+
+  # ── Sequence search ───────────────────────────────────────────────────────
+  - blast=2.15.0                     # makeblastdb, blastn, tblastn, blastx
+  - hmmer                            # version unpinned: busco→sepp→pasta requires hmmer==3.1b2
+  - diamond=2.1.9                    # fast protein search (alternative to blastp)
+
+  # ── Alignment ─────────────────────────────────────────────────────────────
+  - mafft=7.526                      # Multiple sequence alignment
+  - muscle>=3.8,<4                   # muscle 5.x conflicts with sepp→pasta; pin to 3.x
+  - minimap2=2.28                    # Long-read alignment
+
+  # ── Synteny ───────────────────────────────────────────────────────────────
+  # clinker is pip-only (not in any conda channel) — installed via pip below
+  - mcscanx=1.0.0                    # Large-scale synteny (optional)
+
+  # ── Python base & libraries ───────────────────────────────────────────────
+  - python=3.10
+  - biopython=1.84
+  - pandas=2.2.2
+  - numpy=1.26.4
+  - matplotlib>=3.7               # 3.9.0 exact pin not available; >=3.7 resolves cleanly
+  - seaborn=0.13.2
+  - scipy=1.13.1
+
+  # ── Visualization ─────────────────────────────────────────────────────────
+  - pyCirclize=1.4.0                 # Circular genome plots
+  # dna-features-viewer is pip-only — installed via pip below
+  - pycairo=1.26.1                   # Required by some plotting tools
+
+  # ── Utilities ─────────────────────────────────────────────────────────────
+  - pigz=2.8                         # Parallel gzip
+  - samtools=1.20
+  - bedtools=2.31.1
+  - csvkit=2.0.0                     # CSV/TSV manipulation
+
+  # ── Reporting ─────────────────────────────────────────────────────────────
+  - jinja2=3.1.4                     # Snakemake report templates
+
+  # ── Pip-only packages ─────────────────────────────────────────────────────
+  - pip
+  - pip:
+      - pygenomeviz==1.4.0           # Linear synteny plots (complement to clinker)
+      - requests==2.32.3
+      - clinker==0.0.28              # Gene cluster synteny plots (pip-only)
+      - dna-features-viewer==3.1.3   # Linear locus plots (pip-only)
+      - tf-keras                     # Keras 2 compat layer for TF 2.x; required by EDTA TIR-Learner (Keras 3 dropped TF SavedModel support)
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Installation instructions
+# ─────────────────────────────────────────────────────────────────────────────
+# 1. Install Miniforge/Mamba if not already present:
+#    curl -L https://github.com/conda-forge/miniforge/releases/latest/download/Miniforge3-MacOSX-arm64.sh | bash
+#    (use MacOSX-x86_64 for Intel Macs, or Linux-x86_64 for Linux/HPC)
+#
+# 2. Create the environment:
+#    mamba env create -f environment.yml
+#
+# 3. Activate:
+#    conda activate fungal_genomics
+#
+# 4. Verify key tools:
+#    snakemake --version        # should print 7.32.4
+#    busco --version            # should print 5.7.1
+#    datasets --version         # should print 16.22.1
+#    hmmsearch -h               # should show HMMER help
+#
+# NOTE: EDTA is Linux-only. On macOS, run EDTA via Docker:
+#    docker pull oushujun/edta:2.2.0
+#    docker run -v $(pwd):/data oushujun/edta:2.2.0 EDTA.pl --genome /data/<assembly.fa> ...
+#    The Snakemake rule in repeat_annotation.smk includes a Docker-compatible shell block.

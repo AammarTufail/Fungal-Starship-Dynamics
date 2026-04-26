@@ -1,0 +1,91 @@
+# =============================================================================
+# .gitignore for ToxTA Starship Diversity Analysis
+# =============================================================================
+
+# ── Large data files (do not commit raw genomic data to Git) ─────────────────
+results/
+logs/
+*.fasta
+*.fa
+*.fna
+*.fastq
+*.fastq.gz
+*.fq
+*.fq.gz
+*.bam
+*.bam.bai
+*.sam
+*.vcf
+*.vcf.gz
+*.bcf
+
+# ── BLAST database files ──────────────────────────────────────────────────────
+*.nhr
+*.nin
+*.nsq
+*.nnd
+*.nni
+*.nog
+*.nsd
+*.nsi
+*.nto
+*.not
+*.ntf
+
+# ── HMMER index files (regenerated with hmmpress) ────────────────────────────
+*.h3f
+*.h3i
+*.h3m
+*.h3p
+
+# ── BUSCO temporary files ─────────────────────────────────────────────────────
+busco_downloads/
+run_*/
+augustus_output/
+
+# ── EDTA intermediate files ───────────────────────────────────────────────────
+*.mod
+*.mod.EDTA.raw/
+*.EDTA.combine/
+
+# ── Conda / Python ────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+*.egg
+.conda/
+envs/
+.snakemake/
+
+# ── Snakemake cache ───────────────────────────────────────────────────────────
+.snakemake/
+snakemake_report.html
+
+# ── OS / Editor ───────────────────────────────────────────────────────────────
+.DS_Store
+*.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+Desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ── Jupyter ───────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── Logs and temporary files ─────────────────────────────────────────────────
+*.log
+*.tmp
+*.temp
+*.pid
+
+# ─── EXCEPTION: Keep placeholder resource files in the repo ──────────────────
+# These are small placeholder files with download instructions.
+!resources/ToxA_P0C1P7.fasta
+!resources/Y_recombinase.hmm
