@@ -1,0 +1,13 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+#
+# Program:         hmmsearch
+# Version:         3.4 (Aug 2023)
+# Pipeline mode:   SEARCH
+# Query file:      resources/Y_recombinase.hmm
+# Target file:     results/starship/Bsorokiniana_ND90Pr/Bsorokiniana_ND90Pr_sixframe.faa
+# Option settings: hmmsearch --tblout results/starship/Bsorokiniana_ND90Pr/Bsorokiniana_ND90Pr_yrec_hits.tblout --domtblout results/starship/Bsorokiniana_ND90Pr/Bsorokiniana_ND90Pr_yrec_hits.domtblout -E 1e-10 --cpu 4 resources/Y_recombinase.hmm results/starship/Bsorokiniana_ND90Pr/Bsorokiniana_ND90Pr_sixframe.faa 
+# Current dir:     /media/codanics/ext_ssd1/00_Postdoc_applications/01_fungal_genomics
+# Date:            Thu Apr 23 20:27:49 2026
+# [ok]

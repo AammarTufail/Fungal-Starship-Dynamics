@@ -3,7 +3,7 @@
 # =============================================================================
 
 # ── Large data files (do not commit raw genomic data to Git) ─────────────────
-results/
+# results/
 logs/
 *.fasta
 *.fa

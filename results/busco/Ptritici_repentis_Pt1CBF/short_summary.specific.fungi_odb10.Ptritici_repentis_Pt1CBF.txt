@@ -1,0 +1,36 @@
+# BUSCO version is: 5.7.1 
+# The lineage dataset is: fungi_odb10 (Creation date: 2024-01-08, number of genomes: 549, number of BUSCOs: 758)
+# Summarized benchmarking in BUSCO notation for file /media/codanics/ext_ssd1/00_Postdoc_applications/01_fungal_genomics/results/genomes/Ptritici_repentis_Pt1CBF/Ptritici_repentis_Pt1CBF.fasta
+# BUSCO was run in mode: euk_genome_aug
+# Gene predictor used: augustus
+
+	***** Results: *****
+
+	C:98.1%[S:97.8%,D:0.3%],F:0.5%,M:1.4%,n:758	   
+	743	Complete BUSCOs (C)			   
+	741	Complete and single-copy BUSCOs (S)	   
+	2	Complete and duplicated BUSCOs (D)	   
+	4	Fragmented BUSCOs (F)			   
+	11	Missing BUSCOs (M)			   
+	758	Total BUSCO groups searched		   
+
+Assembly Statistics:
+	48	Number of scaffolds
+	705	Number of contigs
+	37997465	Total length
+	1.668%	Percent gaps
+	1 MB	Scaffold N50
+	116 KB	Contigs N50
+
+
+Dependencies and versions:
+	hmmsearch: 3.4
+	bbtools: None
+	makeblastdb: 2.15.0+
+	tblastn: 2.15.0+
+	augustus: 3.5.0
+	gff2gbSmallDNA.pl: None
+	new_species.pl: None
+	etraining: None
+	python: sys.version_info(major=3, minor=10, micro=14, releaselevel='final', serial=0)
+	busco: 5.7.1

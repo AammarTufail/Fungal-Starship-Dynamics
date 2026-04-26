@@ -1,0 +1,10 @@
+stats for results/genomes/Pnodorum_SN15/Pnodorum_SN15.fasta
+sum = 37213987, n = 108, ave = 344573.95, largest = 2531949
+N50 = 1045363, n = 13
+N60 = 976000, n = 16
+N70 = 716313, n = 21
+N80 = 476925, n = 27
+N90 = 320110, n = 37
+N100 = 2005, n = 108
+N_count = 164388
+Gaps = 386

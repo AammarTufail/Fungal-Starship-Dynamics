@@ -1,0 +1,10 @@
+stats for results/genomes/Bsorokiniana_ND90Pr/Bsorokiniana_ND90Pr.fasta
+sum = 34409167, n = 154, ave = 223436.15, largest = 3642493
+N50 = 1789485, n = 7
+N60 = 1726533, n = 9
+N70 = 1396008, n = 12
+N80 = 1310208, n = 14
+N90 = 1003746, n = 17
+N100 = 2011, n = 154
+N_count = 1196549
+Gaps = 358

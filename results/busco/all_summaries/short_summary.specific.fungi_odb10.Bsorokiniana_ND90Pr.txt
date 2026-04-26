@@ -1,0 +1,36 @@
+# BUSCO version is: 5.7.1 
+# The lineage dataset is: fungi_odb10 (Creation date: 2024-01-08, number of genomes: 549, number of BUSCOs: 758)
+# Summarized benchmarking in BUSCO notation for file /media/codanics/ext_ssd1/00_Postdoc_applications/01_fungal_genomics/results/genomes/Bsorokiniana_ND90Pr/Bsorokiniana_ND90Pr.fasta
+# BUSCO was run in mode: euk_genome_aug
+# Gene predictor used: augustus
+
+	***** Results: *****
+
+	C:98.4%[S:98.4%,D:0.0%],F:0.4%,M:1.2%,n:758	   
+	746	Complete BUSCOs (C)			   
+	746	Complete and single-copy BUSCOs (S)	   
+	0	Complete and duplicated BUSCOs (D)	   
+	3	Fragmented BUSCOs (F)			   
+	9	Missing BUSCOs (M)			   
+	758	Total BUSCO groups searched		   
+
+Assembly Statistics:
+	154	Number of scaffolds
+	504	Number of contigs
+	34409167	Total length
+	3.477%	Percent gaps
+	1 MB	Scaffold N50
+	243 KB	Contigs N50
+
+
+Dependencies and versions:
+	hmmsearch: 3.4
+	bbtools: None
+	makeblastdb: 2.15.0+
+	tblastn: 2.15.0+
+	augustus: 3.5.0
+	gff2gbSmallDNA.pl: None
+	new_species.pl: None
+	etraining: None
+	python: sys.version_info(major=3, minor=10, micro=14, releaselevel='final', serial=0)
+	busco: 5.7.1

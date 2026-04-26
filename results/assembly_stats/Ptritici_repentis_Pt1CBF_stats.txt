@@ -1,0 +1,10 @@
+stats for results/genomes/Ptritici_repentis_Pt1CBF/Ptritici_repentis_Pt1CBF.fasta
+sum = 37997465, n = 48, ave = 791613.85, largest = 6767051
+N50 = 1986450, n = 6
+N60 = 1817328, n = 8
+N70 = 1597767, n = 10
+N80 = 1207272, n = 12
+N90 = 693314, n = 16
+N100 = 6041, n = 48
+N_count = 633833
+Gaps = 657

@@ -1,0 +1,13 @@
+#                                                               --- full sequence ---- --- best 1 domain ---- --- domain number estimation ----
+# target name        accession  query name           accession    E-value  score  bias   E-value  score  bias   exp reg clu  ov env dom rep inc description of target
+#------------------- ---------- -------------------- ---------- --------- ------ ----- --------- ------ -----   --- --- --- --- --- --- --- --- ---------------------
+#
+# Program:         hmmsearch
+# Version:         3.4 (Aug 2023)
+# Pipeline mode:   SEARCH
+# Query file:      resources/Y_recombinase.hmm
+# Target file:     results/starship/Ptritici_repentis_Pt1CBF/Ptritici_repentis_Pt1CBF_sixframe.faa
+# Option settings: hmmsearch --tblout results/starship/Ptritici_repentis_Pt1CBF/Ptritici_repentis_Pt1CBF_yrec_hits.tblout --domtblout results/starship/Ptritici_repentis_Pt1CBF/Ptritici_repentis_Pt1CBF_yrec_hits.domtblout -E 1e-10 --cpu 4 resources/Y_recombinase.hmm results/starship/Ptritici_repentis_Pt1CBF/Ptritici_repentis_Pt1CBF_sixframe.faa 
+# Current dir:     /media/codanics/ext_ssd1/00_Postdoc_applications/01_fungal_genomics
+# Date:            Thu Apr 23 20:27:49 2026
+# [ok]
