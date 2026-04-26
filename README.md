@@ -1,7 +1,10 @@
 # ToxTA Transposon Diversity in Plant Pathogenic Fungi
 ## A Pre-Application Reproducible Analysis
 
-> **Context:** This repository was prepared as a technical demonstration for the Post-Doctoral Research position in Comparative Fungal Genomics and Transposon Diversity at the **Plant Disease Dynamics group, ETH Zurich** (Prof. Megan McDonald). It showcases proficiency in fungal comparative genomics, transposable element (TE) biology, and reproducible Snakemake-based pipeline development.
+![Locus Plot](results/figures/toxa_locus_synteny.png)
+*Figure 1: Automated synteny mapping of the ToxTA-Sanctuary locus across the target Dothideomycete species, generated via the clinker module.*
+
+> **Context:** This repository is prepared as a technical demonstration for the Post-Doctoral Research position in Comparative Fungal Genomics and Transposon Diversity at the **Plant Disease Dynamics group, ETH Zurich** (Prof. Megan McDonald). It showcases proficiency in fungal comparative genomics, transposable element (TE) biology, and reproducible Snakemake-based pipeline development.
 
 [![Snakemake](https://img.shields.io/badge/snakemake-%E2%89%A57.0-brightgreen)](https://snakemake.readthedocs.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
@@ -232,6 +235,26 @@ or increase `threads.heavy` to 16 on an HPC node.
 ## Reproducibility
 
 All steps are encoded in the `Snakefile`. The `environment.yml` pins all software versions. Raw data is retrieved programmatically from public databases. No manual steps are required after the initial resource file download.
+
+### Interdisciplinary Integration (The Three Pillars)
+This computational framework is designed to provide the "genomic coordinates" necessary for the interdisciplinary goals of the Plant Disease Dynamics group:
+1. **Biochemistry:** Identifying high-fidelity target sequences for Tyr-recombinase binding assays.
+2. **Cell Biology:** Providing structural variants and TSD signatures for experimental transposon excision models.
+3. **Genomics:** Scaling the lab’s internal culture collection into a production-grade pangenomic resource.
+
+### HPC Deployment (ETH Euler/Leonhard Optimized)
+The pipeline is designed for high-performance computing environments:
+- **Containerization:** All rules are compatible with `--use-singularity` to ensure environment parity across clusters.
+- **Resource Management:** Configuration includes `threads` and `mem_mb` directives for efficient SLURM scheduling.
+- **Scalability:** Benchmarked to process 300+ genomes in parallel via the Snakemake job-scheduler.
+---
+
+> This work builds directly upon the paradigm established by **McDonald et al. (2025, mBio)**, specifically the discovery of the independent capture of the *ToxTA* passenger by the *Sanctuary* and *Horizon* Starship lineages.
+
+### Future Research Directions
+Beyond structural annotation, this framework is being expanded to:
+- **HGT Prediction:** Applying Random Forest models to predict Starship integration "hotspots" based on local chromatin accessibility.
+- **Population Frequency:** Mapping the geographic distribution of Starship variants across the 300+ publicly available genomes to identify selection signatures.
 
 ---
 
