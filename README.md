@@ -1,9 +1,6 @@
 # ToxTA Transposon Diversity in Plant Pathogenic Fungi
 ## A Pre-Application Reproducible Analysis
 
-![Locus Plot](results/figures/toxa_locus_synteny.png)
-*Figure 1: Automated synteny mapping of the ToxTA-Sanctuary locus across the target Dothideomycete species, generated via the clinker module.*
-
 > **Context:** This repository is prepared as a technical demonstration for the Post-Doctoral Research position in Comparative Fungal Genomics and Transposon Diversity at the **Plant Disease Dynamics group, ETH Zurich** (Prof. Megan McDonald). It showcases proficiency in fungal comparative genomics, transposable element (TE) biology, and reproducible Snakemake-based pipeline development.
 
 [![Snakemake](https://img.shields.io/badge/snakemake-%E2%89%A57.0-brightgreen)](https://snakemake.readthedocs.io)
@@ -22,6 +19,9 @@ Horizontal gene transfer (HGT) in pathogenic fungi can rapidly equip unrelated s
 | *Bipolaris sorokiniana* (ND90Pr) | Spot Blotch / Crown Rot | **Sanctuary** |
 
 *ToxA* is nested inside **ToxTA**, a ~12 kb passenger transposon, which has been independently captured by at least two distinct giant Starship elements (*Sanctuary* and *Horizon*). This analysis aims to characterise the structural diversity of this nested transposon architecture across all available genomes.
+
+![Conceptual Figure](conceptual_figure.png)
+**Figure 1: Conceptual Figure**: *Independent Capture of ToxTA by Fungal Starships. This figure illustrates the horizontal gene transfer (HGT) of the ToxTA transposon containing the ToxA effector gene from P. nodorum (Donor) to two distinct recipient species, P. tritici-repentis (Horizon Starship) and B. sorokiniana (Sanctuary Starship). The donor genome shows the original location of ToxTA. In P. tritici-repentis, the ToxTA transposon is integrated into the 'Horizon Starship' (purple), while in B. sorokiniana, it is inserted into the 'Sanctuary Starship' (blue). Both recipients are associated with infected wheat plants. The arrows represent two separate HGT events leading to the independent capture of ToxTA by the distinct mobile elements in the respective recipient genomes.* ***Created by ChatGPT***
 
 ---
 
