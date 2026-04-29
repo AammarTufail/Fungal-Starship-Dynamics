@@ -6,6 +6,9 @@
 [![Snakemake](https://img.shields.io/badge/snakemake-%E2%89%A57.0-brightgreen)](https://snakemake.readthedocs.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
+![Workflow Fungal Genomics](workflow.png) 
+**Figure 1: Workflow Overview**: This figure illustrates the complete workflow for analyzing the ToxTA transposon diversity in plant pathogenic fungi. The workflow is structured into four main phases: Data Acquisition, Quality Control, Repeat Annotation, and Gene Mining. Each phase consists of specific steps that are executed sequentially to achieve the final analysis of the ToxTA transposon architecture across different fungal genomes.* ***Created by ChatGPT***
+
 ---
 
 ## Scientific Background
@@ -19,9 +22,6 @@ Horizontal gene transfer (HGT) in pathogenic fungi can rapidly equip unrelated s
 | *Bipolaris sorokiniana* (ND90Pr) | Spot Blotch / Crown Rot | **Sanctuary** |
 
 *ToxA* is nested inside **ToxTA**, a ~12 kb passenger transposon, which has been independently captured by at least two distinct giant Starship elements (*Sanctuary* and *Horizon*). This analysis aims to characterise the structural diversity of this nested transposon architecture across all available genomes.
-
-![Conceptual Figure](conceptual_figure.png)
-**Figure 1: Conceptual Figure**: *Independent Capture of ToxTA by Fungal Starships. This figure illustrates the horizontal gene transfer (HGT) of the ToxTA transposon containing the ToxA effector gene from P. nodorum (Donor) to two distinct recipient species, P. tritici-repentis (Horizon Starship) and B. sorokiniana (Sanctuary Starship). The donor genome shows the original location of ToxTA. In P. tritici-repentis, the ToxTA transposon is integrated into the 'Horizon Starship' (purple), while in B. sorokiniana, it is inserted into the 'Sanctuary Starship' (blue). Both recipients are associated with infected wheat plants. The arrows represent two separate HGT events leading to the independent capture of ToxTA by the distinct mobile elements in the respective recipient genomes.* ***Created by ChatGPT***
 
 ---
 
@@ -54,6 +54,12 @@ Horizontal gene transfer (HGT) in pathogenic fungi can rapidly equip unrelated s
 
 ---
 
+## Complete Workflow Overview
+1. **Data Acquisition**: Download reference-quality genome assemblies for *P. nodorum* SN15, *P. tritici-repentis* Pt-1C-BFP, and *B. sorokiniana* ND90Pr from NCBI using the `datasets` CLI tool.
+2. **Quality Control**: Assess assembly completeness using BUSCO v5 with the `fungi_odb10` lineage dataset.
+3. **Repeat Annotation**: Run EDTA v2 to annotate the full repeatome, including TEs and nested structures.
+4. **Gene Mining**: Use BLAST+ `tblastn` to locate the *ToxA* gene in each assembly, followed by HMMER3 `hmmsearch` to identify Y-recombinase (DUF3435) proteins indicative of Starship captains. Custom scripts will detect target site duplications (TSDs) flanking the ToxTA insertion. Finally, extract the *ToxA* locus with flanking regions for synteny analysis using clinker and visualization with pyCirclize.
+5. 
 ## Quick Start
 
 ### 1. Prerequisites
